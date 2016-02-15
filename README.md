@@ -1,5 +1,13 @@
-Run the following:
+## ASP.NET Core PostgreSQL Docker App Demo
 
-dnu restore
+You'll have to change the connection string in appsettings.json as appropriate for your PostgreSQL setup.
 
-dnx web
+To run the app do the following:
+
+1. dnu restore
+
+1. dnx web
+
+1. Visit http://localhost:5000 in the browser
+
+
