@@ -15,7 +15,7 @@ Application demo designed to show how ASP.NET Core and PostgreSQL can be run in 
 
 ##To run the app with ASP.NET Core and PostgreSQL (without Docker):
 
-1. Install PostgreSQL. 
+1. Install and start PostgreSQL:
 
   - Mac:     http://postgresapp.com (easiest way to get it going quickly)
 
