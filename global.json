@@ -1,0 +1,7 @@
+{
+	"sdk": {
+		"version": "1.0.0-rc2-16357"
+	},
+
+	"projects": [ "AspNetCorePostgreSQLDockerApp" ]
+}

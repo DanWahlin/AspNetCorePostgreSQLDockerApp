@@ -1,0 +1,20 @@
+@model List<AspNetCorePostgreSQLDockerApp.Models.DockerCommand>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Docker Commands</h1>
+@foreach (var dockerCommand in Model) {
+
+   <h2>@dockerCommand.Command Command</h2>
+   @dockerCommand.Description
+   <br />
+   
+   @foreach (var commandExample in dockerCommand.Examples) {
+        <h3>@commandExample.Example</h3>
+        @commandExample.Description
+        <br />
+   }
+   
+   <br />
+}
