@@ -1,3 +1,11 @@
+# Build: docker build -f aspnetcore.dockerfile -t danwahlin/aspnetcore .
+
+# Start PostgreSQL (https://hub.docker.com/_/postgres)
+# docker run -d --name my-postgres -e POSTGRES_PASSWORD=password postgres
+
+# Start Asp.Net Core
+# Run:   docker run -d -p 5000:5000 --link my-postgres:postgres danwahlin/aspnetcore
+
 FROM debian:jessie
 
 MAINTAINER Dan Wahlin
