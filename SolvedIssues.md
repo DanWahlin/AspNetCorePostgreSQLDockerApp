@@ -47,3 +47,13 @@ dnvm uninstall 1.0.0-rc2-16312 -r coreclr
 ## How to fix error on Linux:  File name: 'System.Net.NetworkInformation, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' ---> System.IO.FileNotFoundException: Could not load the specified file.
 
 Add "Microsoft.NETCore.Platforms": "1.0.0-rc2-*" to project.json. Missing "runtime.linux.System.Net.NetworkInformation": "4.1.0...." probably otherwise.
+
+
+## Omnisharp not running correctly for ASP.NET Core VS Code project
+
+Make sure the mono version of ASP.NET Core is installed that matches the project version defined in global.json:
+
+I needed to grab the latest version that matched the coreclr version:
+
+dnvm upgrade -u -r mono
+
