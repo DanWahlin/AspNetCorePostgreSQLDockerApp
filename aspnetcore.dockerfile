@@ -1,10 +1,17 @@
 # Build: docker build -f aspnetcore.dockerfile -t danwahlin/aspnetcore .
 
-# Start PostgreSQL (https://hub.docker.com/_/postgres)
+# Option 1
+# Start PostgreSQL and ASP.NET Core (link ASP.NET core to ProgreSQL container with legacy linking)
+ 
 # docker run -d --name my-postgres -e POSTGRES_PASSWORD=password postgres
+# docker run -d -p 5000:5000 --link my-postgres:postgres danwahlin/aspnetcore
 
-# Start Asp.Net Core
-# Run:   docker run -d -p 5000:5000 --link my-postgres:postgres danwahlin/aspnetcore
+# Option 2: Create a custom bridge network and add containers into it
+
+# docker network create --driver bridge isolated_network
+# docker run -d --net=isolated_network --name postgres -e POSTGRES_PASSWORD=password postgres
+# docker run -d --net=isolated_network --name aspnetcoreapp -p 5000:5000 danwahlin/aspnetcore
+
 
 FROM debian:jessie
 
