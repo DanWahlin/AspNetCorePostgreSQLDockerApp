@@ -11,9 +11,9 @@ The app uses Entity Framework to create a simple database that stores Docker com
 
 2. Open the `Docker QuickStart Terminal`. After VirtualBox starts in the terminal navigate to the app's folder.
 
-3. Run `docker-compose build`.
+3. Run `docker-compose build`
 
-4. Run `docker-compose up`.
+4. Run `docker-compose up`
 
 5. Navigate to http://192.168.99.100:5000 in your browser to view the site. This assumes that's the IP assigned to VirtualBox - change if needed.
 
