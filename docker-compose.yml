@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+
+  web:
+    build: 
+      context: .
+      dockerfile: aspnetcore.dockerfile
+    ports:
+     - "5000:5000"
+    networks:
+      - aspnetcoreapp-network
+      
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+    networks:
+      - aspnetcoreapp-network
+
+networks:
+  aspnetcoreapp-network:
+    driver: bridge
+
+
