@@ -6,7 +6,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/bin/Debug/dnxcore50/AspNetCorePostgreSQLDockerApp.dll",
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.0/AspNetCorePostgreSQLDockerApp.dll",
             "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false
@@ -16,7 +16,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/bin/Debug/dnxcore50/AspNetCorePostgreSQLDockerApp.dll",
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.0/AspNetCorePostgreSQLDockerApp.dll",
             "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,
