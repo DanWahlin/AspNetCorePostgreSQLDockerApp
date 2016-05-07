@@ -1,4 +1,4 @@
-using Microsoft.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -23,7 +23,7 @@ namespace AspNetCorePostgreSQLDockerApp.Repository
         }
 
         public async Task SeedAsync(IServiceProvider serviceProvider)
-        {           
+        {
             //Based on EF team's example at https://github.com/aspnet/MusicStore/blob/dev/src/MusicStore/Models/SampleData.cs#L23
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
@@ -33,27 +33,27 @@ namespace AspNetCorePostgreSQLDockerApp.Repository
                 {
                     if (!await db.DockerCommands.AnyAsync()) {
                       await InsertSampleData(db);
-                    }                    
+                    }
                 }
             }
         }
 
         public async Task InsertSampleData(DockerCommandsDbContext db)
         {
-            var commands = GetDockerCommands();  
+            var commands = GetDockerCommands();
             db.DockerCommands.AddRange(commands);
-            
+
             try
             {
               await db.SaveChangesAsync();
             }
             catch (Exception exp)
             {
-              _logger.LogError($"Error in {nameof(DbSeeder)}: " + exp.Message);              
+              _logger.LogError($"Error in {nameof(DbSeeder)}: " + exp.Message);
             }
-            
+
         }
-        
+
         private List<DockerCommand> GetDockerCommands()
         {
             var cmd1 = new DockerCommand {
@@ -70,7 +70,7 @@ namespace AspNetCorePostgreSQLDockerApp.Repository
                     }
                 }
             };
-            
+
             var cmd2 = new DockerCommand {
                 Command = "ps",
                 Description = "Lists containers",
@@ -85,7 +85,7 @@ namespace AspNetCorePostgreSQLDockerApp.Repository
                     }
                 }
             };
-            
+
             return new List<DockerCommand> { cmd1, cmd2 };
         }
     }

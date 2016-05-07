@@ -1,4 +1,4 @@
-using Microsoft.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using AspNetCorePostgreSQLDockerApp.Models;
 
 namespace AspNetCorePostgreSQLDockerApp.Repository
