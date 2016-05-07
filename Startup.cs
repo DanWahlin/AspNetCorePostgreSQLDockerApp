@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Extensions.Configuration;
@@ -31,7 +31,7 @@ namespace AspNetCorePostgreSQLDockerApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-                
+
             //Add PostgreSQL support
             services.AddEntityFramework()
                 .AddNpgsql()
@@ -39,7 +39,7 @@ namespace AspNetCorePostgreSQLDockerApp
                     options.UseNpgsql(Configuration["Data:DockerCommandsDbContext:ConnectionString"]));
 
             services.AddMvc();
-            
+
             // Add our PostgreSQL Repository
             services.AddTransient<IDockerCommandsRepository, DockerCommandsRepository>();
             services.AddTransient<DbSeeder>();
@@ -65,11 +65,11 @@ namespace AspNetCorePostgreSQLDockerApp
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            
+
             dbSeeder.SeedAsync(app.ApplicationServices).Wait();
         }
-        
-        
+
+
         public static void Main(string[] args)
         {
           var configuration = WebApplicationConfiguration.GetDefault(args);
@@ -80,6 +80,6 @@ namespace AspNetCorePostgreSQLDockerApp
 
           host.Run();
         }
-        
+
     }
 }
