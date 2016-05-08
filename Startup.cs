@@ -2,23 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AspNetCorePostgreSQLDockerApp.Repository;
 
+
+
 namespace AspNetCorePostgreSQLDockerApp
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment env)
         {
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
@@ -31,15 +34,14 @@ namespace AspNetCorePostgreSQLDockerApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-                
+
             //Add PostgreSQL support
-            services.AddEntityFramework()
-                .AddNpgsql()
+            services.AddEntityFrameworkNpgsql()
                 .AddDbContext<DockerCommandsDbContext>(options =>
                     options.UseNpgsql(Configuration["Data:DockerCommandsDbContext:ConnectionString"]));
 
             services.AddMvc();
-            
+
             // Add our PostgreSQL Repository
             services.AddTransient<IDockerCommandsRepository, DockerCommandsRepository>();
             services.AddTransient<DbSeeder>();
@@ -53,9 +55,8 @@ namespace AspNetCorePostgreSQLDockerApp
             loggerFactory.AddDebug();
 
             app.UseDeveloperExceptionPage();
-            app.UseDatabaseErrorPage();
 
-            app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
+            //app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
 
             app.UseStaticFiles();
 
@@ -65,21 +66,9 @@ namespace AspNetCorePostgreSQLDockerApp
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            
+
             dbSeeder.SeedAsync(app.ApplicationServices).Wait();
         }
-        
-        
-        public static void Main(string[] args)
-        {
-          var configuration = WebApplicationConfiguration.GetDefault(args);
-          var host = new WebApplicationBuilder()
-              .UseStartup<Startup>()
-              .UseConfiguration(configuration)
-              .Build();
 
-          host.Run();
-        }
-        
     }
 }
