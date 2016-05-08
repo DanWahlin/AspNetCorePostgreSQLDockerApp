@@ -3,14 +3,14 @@ version: '2'
 services:
 
   web:
-    build: 
+    build:
       context: .
-      dockerfile: aspnetcore.dockerfile
+      dockerfile: Dockerfile
     ports:
      - "5000:5000"
     networks:
       - aspnetcoreapp-network
-      
+
   postgres:
     image: postgres
     environment:
