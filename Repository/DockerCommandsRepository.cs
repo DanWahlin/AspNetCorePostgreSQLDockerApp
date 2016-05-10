@@ -1,5 +1,5 @@
 using System;
-using Microsoft.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,16 +13,16 @@ namespace AspNetCorePostgreSQLDockerApp.Repository
     {
         private readonly DockerCommandsDbContext _context;
         private readonly ILogger _logger;
-      
+
         public DockerCommandsRepository(DockerCommandsDbContext context, ILoggerFactory loggerFactory) {
           _context = context;
           _logger = loggerFactory.CreateLogger("DockerCommandsRepository");
         }
-      
+
         public async Task<List<DockerCommand>> GetDockerCommandsAsync() {
           return await _context.DockerCommands.Include(dc => dc.Examples).ToListAsync();
         }
-        
+
         public async Task InsertDockerCommandAsync(DockerCommand command) {
           _context.DockerCommands.Add(command);
           try {

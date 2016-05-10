@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 using AspNetCorePostgreSQLDockerApp.Repository;
 
@@ -10,13 +10,13 @@ namespace AspNetCorePostgreSQLDockerApp.Controllers
 {
     public class HomeController : Controller
     {
-      
+
         IDockerCommandsRepository _repo;
-        
+
         public HomeController(IDockerCommandsRepository repo) {
           _repo = repo;
         }
-      
+
         public async Task<IActionResult> Index()
         {
             //Call into PostgreSQL
