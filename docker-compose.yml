@@ -5,7 +5,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: aspnetcore.dockerfile
     ports:
      - "5000:5000"
     networks:
