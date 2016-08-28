@@ -20,7 +20,7 @@ The app uses Entity Framework to create a simple database that stores Docker com
 
 ###Option 2: Manually run Docker commands
 
-1. Install Docker Toolbox (http://docker.com/toolbox).
+1. Install Docker for Mac or Docker for Windows or Docker Toolbox (http://docker.com/toolbox).
 
 2. Open the `Docker QuickStart Terminal`. After VirtualBox starts in the terminal navigate to the app's folder.
 
