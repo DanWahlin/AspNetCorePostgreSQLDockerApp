@@ -2,23 +2,20 @@ FROM microsoft/dotnet:latest
 
 MAINTAINER Dan Wahlin, Shayne Boyer
 
-COPY . /app
+COPY ./project.json /var/www/aspnetcoreapp/project.json
 
-WORKDIR /app
+WORKDIR /var/www/aspnetcoreapp
 
 RUN ["dotnet", "restore"]
 
 RUN ["dotnet", "build"]
-
-# RUN ["dotnet", "ef", "database", "update"]
 
 EXPOSE 5000/tcp
 
 ENTRYPOINT ["dotnet", "run", "--server.urls", "http://0.0.0.0:5000"]
 
 # Build the image:
-# docker build -f aspnetcore.dockerfile -t [yourDockerHubID]/dotnet:1.0.0 .
-# docker push
+# docker build -f aspnetcore.development.dockerfile -t [yourDockerHubID]/dotnet:1.0.0 
 
 # Option 1
 # Start PostgreSQL and ASP.NET Core (link ASP.NET core to ProgreSQL container with legacy linking)

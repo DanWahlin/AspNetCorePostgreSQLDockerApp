@@ -3,16 +3,22 @@ version: '2'
 services:
 
   web:
-    container_name: 'aspnetcore-using-postgresql'
+    container_name: 'aspnetcoreapp'
+    image: 'aspnetcoreapp'
     build:
       context: .
-      dockerfile: aspnetcore.dockerfile
+      dockerfile: aspnetcore.development.dockerfile
+    volumes:
+      - .:/var/www/aspnetcoreapp
     ports:
      - "5000:5000"
+    depends_on:
+     - "postgres"
     networks:
       - aspnetcoreapp-network
 
   postgres:
+    container_name: 'postgres'
     image: postgres
     environment:
       POSTGRES_PASSWORD: password
