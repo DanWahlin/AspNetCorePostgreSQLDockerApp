@@ -1,5 +1,8 @@
 {
   "userSecretsId": "aspnet-AspNetCorePostgreSQLDockerApp-cdfe9fd6-ddf2-4387-bce8-7166939ad0c6",
+  "authors": [
+    "Dan Wahlin"
+  ],
 
   "dependencies": {
     "Microsoft.NETCore.App": {
