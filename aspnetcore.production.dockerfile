@@ -6,6 +6,12 @@ COPY . /var/www/aspnetcoreapp
 
 WORKDIR /var/www/aspnetcoreapp
 
+#Install Node
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+   	&& apt-get install -qqy nodejs
+
+RUN ["npm", "install"]
+
 RUN ["dotnet", "restore"]
 
 RUN ["dotnet", "build"]

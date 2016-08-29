@@ -5,7 +5,8 @@ namespace AspNetCorePostgreSQLDockerApp.Repository
 {
     public class DockerCommandsDbContext : DbContext
     {
-        public DockerCommandsDbContext(DbContextOptions options) : base(options) { }
         public DbSet<DockerCommand> DockerCommands { get; set; }
+
+        public DockerCommandsDbContext(DbContextOptions<DockerCommandsDbContext> options) : base(options) { }
     }
 }

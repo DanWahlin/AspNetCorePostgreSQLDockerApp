@@ -3,6 +3,7 @@ FROM microsoft/dotnet:latest
 MAINTAINER Dan Wahlin, Shayne Boyer
 
 COPY ./project.json /var/www/aspnetcoreapp/project.json
+COPY ./package.json /var/www/aspnetcoreapp/package.json
 
 WORKDIR /var/www/aspnetcoreapp
 
@@ -13,6 +14,9 @@ RUN ["dotnet", "build"]
 EXPOSE 5000/tcp
 
 ENTRYPOINT ["dotnet", "watch", "run", "--server.urls", "http://0.0.0.0:5000"]
+
+#ENTRYPOINT ["dotnet", "run", "--server.urls", "http://0.0.0.0:5000"]
+
 
 # Build the image:
 # docker build -f aspnetcore.development.dockerfile -t [yourDockerHubID]/dotnet:1.0.0 

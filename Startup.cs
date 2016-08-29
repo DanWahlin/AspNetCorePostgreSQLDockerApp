@@ -31,18 +31,23 @@ namespace AspNetCorePostgreSQLDockerApp
             //Add PostgreSQL support
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<DockerCommandsDbContext>(options =>
-                    options.UseNpgsql(Configuration["Data:DockerCommandsDbContext:ConnectionString"]));
+                    options.UseNpgsql(Configuration["Data:DbContext:DockerCommandsConnectionString"]))
+                .AddDbContext<CustomersDbContext>(options =>
+                    options.UseNpgsql(Configuration["Data:DbContext:CustomersConnectionString"]));
+
 
             services.AddMvc();
 
-            // Add our PostgreSQL Repository
+            // Add our PostgreSQL Repositories
             services.AddTransient<IDockerCommandsRepository, DockerCommandsRepository>();
-            services.AddTransient<DbSeeder>();
+            services.AddTransient<ICustomersRepository, CustomersRepository>();
+            services.AddTransient<DockerCommandsDbSeeder>();
+            services.AddTransient<CustomersDbSeeder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,
-                              DbSeeder dbSeeder)
+                              DockerCommandsDbSeeder dockerCommandsDbSeeder, CustomersDbSeeder customersDbSeeder)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -69,7 +74,9 @@ namespace AspNetCorePostgreSQLDockerApp
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            dbSeeder.SeedAsync(app.ApplicationServices).Wait();
+            customersDbSeeder.SeedAsync(app.ApplicationServices).Wait();
+            dockerCommandsDbSeeder.SeedAsync(app.ApplicationServices).Wait();
+
         }
 
     }

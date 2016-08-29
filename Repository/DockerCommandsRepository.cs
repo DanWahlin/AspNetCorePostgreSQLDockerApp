@@ -29,7 +29,7 @@ namespace AspNetCorePostgreSQLDockerApp.Repository
             await _context.SaveChangesAsync();
           }
           catch (Exception exp) {
-            Console.WriteLine("Error in {nameof(InsertDockerCommandAsync)}: " + exp.Message);
+            _logger.LogError($"Error in {nameof(InsertDockerCommandAsync)}: " + exp.Message);
           }
         }
     }

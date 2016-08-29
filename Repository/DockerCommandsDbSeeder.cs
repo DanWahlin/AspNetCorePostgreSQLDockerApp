@@ -2,24 +2,20 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using System.Linq;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using AspNetCorePostgreSQLDockerApp.Models;
 
 namespace AspNetCorePostgreSQLDockerApp.Repository
 {
-    public class DbSeeder
+    public class DockerCommandsDbSeeder
     {
-        readonly DockerCommandsDbContext _context;
-        readonly IDockerCommandsRepository _dockerCommandsRepository;
         readonly ILogger _logger;
 
-        public DbSeeder(DockerCommandsDbContext context, IDockerCommandsRepository repo, ILoggerFactory loggerFactory)
+        public DockerCommandsDbSeeder(ILoggerFactory loggerFactory)
         {
-            _context = context;
-            _dockerCommandsRepository = repo;
-            _logger = loggerFactory.CreateLogger("DbSeederLogger");
+            _logger = loggerFactory.CreateLogger("DockerCommandsDbSeederLogger");
         }
 
         public async Task SeedAsync(IServiceProvider serviceProvider)
@@ -27,18 +23,19 @@ namespace AspNetCorePostgreSQLDockerApp.Repository
             //Based on EF team's example at https://github.com/aspnet/MusicStore/blob/dev/samples/MusicStore/Models/SampleData.cs
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                var db = serviceScope.ServiceProvider.GetService<DockerCommandsDbContext>();
+                var dockerDb = serviceScope.ServiceProvider.GetService<DockerCommandsDbContext>();
+                var customersDb = serviceScope.ServiceProvider.GetService<CustomersDbContext>();
 
-                if (await db.Database.EnsureCreatedAsync())
+                if (await dockerDb.Database.EnsureCreatedAsync())
                 {
-                    if (!await db.DockerCommands.AnyAsync()) {
-                      await InsertSampleData(db);
+                    if (!await dockerDb.DockerCommands.AnyAsync()) {
+                      await InsertDockerSampleData(dockerDb);
                     }
                 }
             }
         }
 
-        public async Task InsertSampleData(DockerCommandsDbContext db)
+        public async Task InsertDockerSampleData(DockerCommandsDbContext db)
         {
             var commands = GetDockerCommands();
             db.DockerCommands.AddRange(commands);
@@ -49,7 +46,7 @@ namespace AspNetCorePostgreSQLDockerApp.Repository
             }
             catch (Exception exp)
             {
-              _logger.LogError($"Error in {nameof(DbSeeder)}: " + exp.Message);
+              _logger.LogError($"Error in {nameof(DockerCommandsDbSeeder)}: " + exp.Message);
             }
 
         }
@@ -88,5 +85,6 @@ namespace AspNetCorePostgreSQLDockerApp.Repository
 
             return new List<DockerCommand> { cmd1, cmd2 };
         }
+
     }
 }
