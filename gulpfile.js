@@ -1,18 +1,19 @@
 var gulp = require('gulp');
 
-gulp.task('default', function () {
-
-});
-
-gulp.task('restore', function() {
+gulp.task("move-node-modules", () => {
     gulp.src([
-        'node_modules/@angular/**/*.js',
-        'node_modules/rxjs/**/*.js',
-        'node_modules/systemjs/dist/*.js',
-        'node_modules/zone.js/dist/*.js',
-        'node_modules/core-js/client/*.js',
-        'node_modules/reflect-metadata/reflect.js',
-        'node_modules/jquery/dist/*.js',
-        'node_modules/bootstrap/dist/**/*.*'
-    ]).pipe(gulp.dest('./wwwroot/libs'));
+            'core-js/client/shim.min.js',
+            'systemjs/dist/system-polyfills.js',
+            'systemjs/dist/system.src.js',
+            'reflect-metadata/Reflect.js',
+            'rxjs/**',
+            'zone.js/dist/**',
+            '@angular/**',
+        ], 
+        {
+            cwd: "node_modules/**"
+        })
+        .pipe(gulp.dest("./wwwroot/libs"));
 });
+
+gulp.task('default', ['move-node-modules']);

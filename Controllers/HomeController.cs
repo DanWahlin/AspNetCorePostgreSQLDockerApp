@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using AspNetCorePostgreSQLDockerApp.Repository;
-using AspNetCorePostgreSQLDockerApp.Models;
 
 namespace AspNetCorePostgreSQLDockerApp.Controllers
 {
@@ -39,9 +38,9 @@ namespace AspNetCorePostgreSQLDockerApp.Controllers
             return View();
         }
 
-        public IActionResult Error()
-        {
-            return View();
-        }
+        // public IActionResult Error()
+        // {
+        //     return View();
+        // }
     }
 }
