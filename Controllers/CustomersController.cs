@@ -6,15 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCorePostgreSQLDockerApp.Controllers
 {
-    public class AngularController : Controller
+    public class CustomersController : Controller
     {
 
         public ActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Error()
         {
             return View();
         }

@@ -69,17 +69,17 @@ namespace AspNetCorePostgreSQLDockerApp
             //app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
  
             // Route all unknown requests to app root
-            app.Use(async (context, next) =>
-            {
-                await next();
+            // app.Use(async (context, next) =>
+            // {
+            //     await next();
 
-                // Handle Angular routes which won't work on the server-side
-                if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
-                {
-                    context.Request.Path = "/index.html";  
-                    await next();
-                }
-            });
+            //     // Handle Angular routes which won't work on the server-side
+            //     if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
+            //     {
+            //         context.Request.Path = "/index.html";  
+            //         await next();
+            //     }
+            // });
 
             // Serve wwwroot as root
             app.UseFileServer();
@@ -89,9 +89,7 @@ namespace AspNetCorePostgreSQLDockerApp
             {
                 // Set root of file server
                 FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules")),
-                // Only react to requests that match this path
                 RequestPath = "/node_modules", 
-                // Don't expose file system
                 EnableDirectoryBrowsing = false
             });
 
@@ -102,6 +100,14 @@ namespace AspNetCorePostgreSQLDockerApp
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                //https://github.com/aspnet/JavaScriptServices/blob/dev/samples/angular/MusicStore/Startup.cs
+                routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Customers", action = "Index" });
+
+                // routes.MapRoute(
+                //     name: "spa-fallback",
+                //     template: "{*anything}",
+                //     defaults: new { controller="Customers", action="Index" });
             });
 
             customersDbSeeder.SeedAsync(app.ApplicationServices).Wait();

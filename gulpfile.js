@@ -16,4 +16,4 @@ gulp.task("move-node-modules", () => {
         .pipe(gulp.dest("./wwwroot/libs"));
 });
 
-gulp.task('default', ['move-node-modules']);
+gulp.task('default', []);

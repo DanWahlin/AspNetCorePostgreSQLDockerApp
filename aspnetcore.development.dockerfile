@@ -7,9 +7,9 @@ COPY ./package.json /var/www/aspnetcoreapp/package.json
 
 WORKDIR /var/www/aspnetcoreapp
 
-RUN ["dotnet", "restore"]
+RUN dotnet restore
 
-RUN ["dotnet", "build"]
+RUN dotnet build
 
 EXPOSE 5000/tcp
 
