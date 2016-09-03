@@ -17,8 +17,6 @@ textarea {
     max-width: 280px;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+.toolbar-item a {
+  cursor: pointer;
 }

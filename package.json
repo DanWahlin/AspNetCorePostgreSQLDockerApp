@@ -7,7 +7,7 @@
     "url": "https://github.com/danwahlin/Angular2-RestfulService"
   },
   "scripts": {
-    "postinstall": "typings install && gulp restore",
+    "postinstall": "typings install && gulp",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "server": "node server.js",
