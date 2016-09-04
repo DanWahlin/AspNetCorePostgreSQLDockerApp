@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using AspNetCorePostgreSQLDockerApp.Models;
 using AspNetCorePostgreSQLDockerApp.Repository;
 
-namespace AspNetCorePostgreSQLDockerApp.Controllers
+namespace AspNetCorePostgreSQLDockerApp.Apis
 {
     [Route("api/[controller]")]
     public class DataServiceController : Controller
