@@ -22,7 +22,7 @@ namespace AspNetCorePostgreSQLDockerApp.Repository
 
         public async Task<List<Customer>> GetCustomersAsync()
         {
-            return await _context.Customers.ToListAsync();
+            return await _context.Customers.OrderBy(c => c.LastName).ToListAsync();
         }
 
         public async Task<Customer> GetCustomerAsync(int id)
@@ -32,7 +32,7 @@ namespace AspNetCorePostgreSQLDockerApp.Repository
 
         public async Task<List<State>> GetStatesAsync()
         {
-            return await _context.States.ToListAsync();
+            return await _context.States.OrderBy(s => s.Abbreviation).ToListAsync();
         }
 
         public async Task<Customer> InsertCustomerAsync(Customer customer)

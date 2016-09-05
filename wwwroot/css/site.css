@@ -13,10 +13,19 @@ body {
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,
 select,
-textarea {
-    max-width: 280px;
+textarea,
+.alert-danger {
+    max-width: 300px;
 }
 
 .toolbar-item a {
   cursor: pointer;
+}
+
+input.ng-invalid, select.ng-invalid {
+  border-left: 5px solid #a94442;
+}
+
+input.ng-valid, select.ng-valid {
+  border-left: 5px solid #42A948;
 }
