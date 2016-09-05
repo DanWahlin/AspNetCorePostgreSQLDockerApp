@@ -51,7 +51,8 @@
     "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }
+    },
+    "Swashbuckle": "6.0.0-beta902"
   },
 
   "tools": {
@@ -84,6 +85,7 @@
   "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true
+    //"xmlDoc": true
   },
 
   "runtimeOptions": {
@@ -102,10 +104,10 @@
     ]
   },
 
+  //Enabling the following build scripts will disable incremental compilation (they've been disabled for dev mode)
   "scripts": {
-    "precompile": [ "dotnet bundle" ],
-    "prepublish": [ "bower install" ],
-    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+    //"precompile": [ "dotnet bundle" ],
+    //"postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   },
 
   "tooling": {

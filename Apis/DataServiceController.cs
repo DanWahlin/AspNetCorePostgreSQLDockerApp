@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace AspNetCorePostgreSQLDockerApp.Apis
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/customers")]
     public class DataServiceController : Controller
     {
         ICustomersRepository _repo;
@@ -19,7 +19,9 @@ namespace AspNetCorePostgreSQLDockerApp.Apis
         }
 
         // GET api/dataservice/customers
-        [HttpGet("customers")]
+        [HttpGet()]
+        [ProducesResponseType(typeof(List<Customer>), 200)]
+        [ProducesResponseType(typeof(List<Customer>), 404)]
         public async Task<ActionResult> Customers()
         {
             var customers = await _repo.GetCustomersAsync();
@@ -30,7 +32,9 @@ namespace AspNetCorePostgreSQLDockerApp.Apis
         }
 
         // GET api/dataservice/customers/5
-        [HttpGet("customers/{id}")]
+        [HttpGet("{id}", Name = "GetCustomersRoute")]
+        [ProducesResponseType(typeof(Customer), 200)]
+        [ProducesResponseType(typeof(Customer), 404)]
         public async Task<ActionResult> Customers(int id)
         {
             var customer = await _repo.GetCustomerAsync(id);
@@ -40,8 +44,10 @@ namespace AspNetCorePostgreSQLDockerApp.Apis
             return Ok(customer);
         }
 
-        // POST api/values
-        [HttpPost("customers")]
+        // POST api/customers
+        [HttpPost()]
+        [ProducesResponseType(typeof(Customer), 201)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<ActionResult> PostCustomer([FromBody]Customer customer)
         {
           if (!ModelState.IsValid) {
@@ -52,12 +58,13 @@ namespace AspNetCorePostgreSQLDockerApp.Apis
           if (newCustomer == null) {
             return BadRequest("Unable to insert customer");
           }
-          var uri = Request.ToUri().ToString() + "/" + newCustomer.Id.ToString();
-          return Created(uri, newCustomer);
+          return CreatedAtRoute("GetCustomersRoute", new { id = newCustomer.Id}, newCustomer);
         }
 
         // PUT api/dataservice/customers/5
-        [HttpPut("customers/{id}")]
+        [HttpPut("{id}")]
+        [ProducesResponseType(typeof(bool), 200)]
+        [ProducesResponseType(typeof(bool), 400)]
         public async Task<ActionResult> PutCustomer(int id, [FromBody]Customer customer)
         {
           if (!ModelState.IsValid) {
@@ -66,13 +73,15 @@ namespace AspNetCorePostgreSQLDockerApp.Apis
 
           var status = await _repo.UpdateCustomerAsync(customer);
           if (!status) {
-            return NoContent();
+            return BadRequest("Unable to update customer");
           }
           return Ok(status);
         }
 
         // DELETE api/dataservice/customers/5
-        [HttpDelete("customers/{id}")]
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(bool), 200)]
+        [ProducesResponseType(typeof(bool), 404)]
         public async Task<ActionResult> DeleteCustomer(int id)
         {
           var status = await _repo.DeleteCustomerAsync(id);
@@ -83,6 +92,8 @@ namespace AspNetCorePostgreSQLDockerApp.Apis
         }
 
         [HttpGet("states")]
+        [ProducesResponseType(typeof(List<State>), 200)]
+        [ProducesResponseType(typeof(List<State>), 404)]
         public async Task<ActionResult> States() {
           var states = await _repo.GetStatesAsync();
           if (states == null) {

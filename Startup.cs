@@ -8,6 +8,8 @@ using Microsoft.Extensions.Logging;
 using AspNetCorePostgreSQLDockerApp.Repository;
 using System.IO;
 using Microsoft.Extensions.FileProviders;
+using Swashbuckle.Swagger.Model;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace AspNetCorePostgreSQLDockerApp
 {
@@ -46,6 +48,29 @@ namespace AspNetCorePostgreSQLDockerApp
             services.AddTransient<ICustomersRepository, CustomersRepository>();
             services.AddTransient<DockerCommandsDbSeeder>();
             services.AddTransient<CustomersDbSeeder>();
+
+            services.AddSwaggerGen();
+            services.ConfigureSwaggerGen(options =>
+            {
+                options.SingleApiVersion(new Info
+                {
+                    Version = "v1",
+                    Title = "ASP.NET Core Customers API",
+                    Description = "ASP.NET Core Customers Web API documentation",
+                    TermsOfService = "None",
+                    Contact = new Contact { Name = "Dan Wahlin", Url = "http://twitter.com/danwahlin"},
+                    License = new License { Name = "MIT", Url = "https://en.wikipedia.org/wiki/MIT_License" }
+                });
+
+                //Enable following for XML comment support and add "xmlDoc": true to buildOptions in project.json
+
+                //Base app path 
+                //var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+
+                //Set the comments path for the swagger json and ui.
+                //options.IncludeXmlComments(basePath + "\\yourAPI.xml");
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,6 +119,12 @@ namespace AspNetCorePostgreSQLDockerApp
             });
 
             app.UseStaticFiles();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
+            app.UseSwaggerUi();
 
             app.UseMvc(routes =>
             {

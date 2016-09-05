@@ -10,6 +10,14 @@ body {
     padding-right: 15px;
 }
 
+.header-row {
+  background-color: #efefef;
+}
+
+.header-row div {
+  font-weight: bold;
+}
+
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,
 select,

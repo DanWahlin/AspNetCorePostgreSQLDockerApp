@@ -18,6 +18,20 @@
 </div>
 
 <div *ngIf="!editViewEnabled">
+    <div class="row header-row">
+        <div class="col-md-2">
+            Name
+        </div>
+        <div class="col-md-4">
+            Email
+        </div>
+        <div class="col-md-4">
+            Address
+        </div>
+        <div class="col-md-2">
+            City
+        </div>
+    </div>
     <div class="row" *ngFor="let customer of customers">
         <div class="col-md-2">
             {{ customer.firstName  }} {{ customer.lastName }} 
