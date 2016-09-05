@@ -17,16 +17,16 @@
     </ul>
 </div>
 
-<ul [hidden]="editViewEnabled">
+<ul *ngIf="!editViewEnabled">
     <li *ngFor="let customer of customers">
         {{ customer.firstName  }} {{ customer.lastName }}
     </li>
 </ul>
 
 <!-- Added editable list to demonstrate doing an HTTP PUT -->
-<div [hidden]="!editViewEnabled">
+<div *ngIf="editViewEnabled">
     <div class="container" *ngFor="let customer of customers">
-        <div class="row" [hidden]="editId===customer.id">
+        <div class="row" *ngIf="editId !== customer.id">
             <div class="col-md-4">
             {{ customer.firstName  }} {{ customer.lastName }}
             </div>
@@ -35,11 +35,13 @@
                     (click)="editId=customer.id">Edit</span>
             </div>
         </div>
-        <div [hidden]="editId!==customer.id">
-            First: <input [(ngModel)]="customer.firstName" />&nbsp;
-            Last: <input [(ngModel)]="customer.lastName" />
-            <span class="btn btn-success" (click)="save(customer)">Save</span>&nbsp;
-            <span class="btn btn-default" (click)="editId=0">Cancel</span>
+        <div *ngIf="editId == customer.id">
+            <form #custForm="ngForm" >
+                First: <input [(ngModel)]="customer.firstName" />&nbsp;
+                Last: <input [(ngModel)]="customer.lastName" />
+                <span class="btn btn-success" (click)="save(customer)">Save</span>&nbsp;
+                <span class="btn btn-default" (click)="editId=0">Cancel</span>
+            </form>
         </div>
         <br />
     </div>
