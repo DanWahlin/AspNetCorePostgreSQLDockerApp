@@ -49,6 +49,8 @@ namespace AspNetCorePostgreSQLDockerApp
             services.AddTransient<DockerCommandsDbSeeder>();
             services.AddTransient<CustomersDbSeeder>();
 
+            //Nice article by Shayne Boyer here on Swagger:
+            //https://docs.asp.net/en/latest/tutorials/web-api-help-pages-using-swagger.html
             services.AddSwaggerGen();
             services.ConfigureSwaggerGen(options =>
             {
