@@ -2,6 +2,8 @@ FROM microsoft/dotnet:latest
 
 MAINTAINER Dan Wahlin, Shayne Boyer
 
+ENV DOTNET_USE_POLLING_FILE_WATCHER=1
+
 COPY ./project.json /var/www/aspnetcoreapp/project.json
 COPY ./package.json /var/www/aspnetcoreapp/package.json
 
