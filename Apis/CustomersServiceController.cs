@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Http;
 namespace AspNetCorePostgreSQLDockerApp.Apis
 {
     [Route("api/[controller]/customers")]
-    public class DataServiceController : Controller
+    public class CustomersServiceController : Controller
     {
         ICustomersRepository _repo;
 
-        public DataServiceController(ICustomersRepository repo) {
+        public CustomersServiceController(ICustomersRepository repo) {
           _repo = repo;
         }
 

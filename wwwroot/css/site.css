@@ -16,6 +16,7 @@ body {
 
 .header-row div {
   font-weight: bold;
+  margin: 10px 00px 10px 0px;
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */

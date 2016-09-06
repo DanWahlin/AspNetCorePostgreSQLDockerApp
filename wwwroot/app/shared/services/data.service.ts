@@ -10,7 +10,7 @@ import { ICustomer } from '../interfaces';
 @Injectable()
 export class DataService {
     
-    private url: string = 'api/dataservice/customers/';
+    private url: string = 'api/customersservice/customers/';
     
     constructor(private http: Http) { }
     
