@@ -11,8 +11,9 @@ The app uses Entity Framework to create a simple database that stores Docker com
 
 1. Install Node on your local system and run the following commands in a command window:
 
-    npm install
-    npm run tsc:w
+    `npm install`
+
+    `npm run tsc:w`
 
 1. Open a separate command prompt window.
 
@@ -29,8 +30,9 @@ The app uses Entity Framework to create a simple database that stores Docker com
 
 1. Install Node on your local system and run the following commands in a command window:
 
-    npm install
-    npm run tsc:w
+    `npm install`
+
+    `npm run tsc:w`
 
 1. Open a separate command prompt window.
 
