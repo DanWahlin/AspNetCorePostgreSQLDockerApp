@@ -20,6 +20,25 @@ ENTRYPOINT ["dotnet", "watch", "run", "--server.urls", "http://0.0.0.0:5000"]
 #ENTRYPOINT ["dotnet", "run", "--server.urls", "http://0.0.0.0:5000"]
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Build the image:
 # docker build -f aspnetcore.development.dockerfile -t [yourDockerHubID]/dotnet:1.0.0 
 

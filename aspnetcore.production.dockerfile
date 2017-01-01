@@ -22,6 +22,23 @@ EXPOSE 5000/tcp
 
 ENTRYPOINT ["dotnet", "run", "--server.urls", "http://0.0.0.0:5000"]
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Build the image:
 # docker build -f aspnetcore.production.dockerfile -t [yourDockerHubID]/dotnet:1.0.0
 # docker push
