@@ -7,6 +7,8 @@ The app uses Entity Framework to create a simple database that stores Docker com
 
 ###Running the App with Docker Compose
 
+1. Navigate to src/AspNetCorePostgreSQLDockerApp in a console window
+
 1. Install `Docker for Mac` or `Docker for Windows` (or Docker Toolbox: http://docker.com/toolbox if you have to)
 
 1. Install Node on your local system and run the following commands in a command window:
