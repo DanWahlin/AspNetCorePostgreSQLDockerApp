@@ -4,12 +4,10 @@
         <base href="/" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - Asp.Net Core PostgreSQL Docker Angular 2 App</title>
+        <title>@ViewData["Title"] - Asp.Net Core PostgreSQL Docker Angular App</title>
 
         <environment names="Development,Staging,Production">
-            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
             <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         </environment>
     </head>
@@ -23,12 +21,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">ASP.NET Core, PostgreSQL, Docker and Angular 2 App</a>
+                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">ASP.NET Core, PostgreSQL, Docker and Angular/TypeScript App</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a asp-controller="Home" asp-action="Index">Docker Commands</a></li>
-                        <li><a asp-controller="Customers" asp-action="Index">Angular 2</a></li>
+                        <li><a asp-controller="Customers" asp-action="Index">Angular Customer Viewer</a></li>
                     </ul>
                 </div>
             </div>
@@ -42,14 +40,6 @@
         </div>
 
         <environment names="Development,Staging,Production">
-            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
-                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                    asp-fallback-test="window.jQuery">
-            </script>
-            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
-                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
-            </script>
             <script src="~/js/site.min.js" asp-append-version="true"></script>
         </environment>
 
