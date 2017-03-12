@@ -41,7 +41,6 @@
         "lite-server": "2.3.0",
         "typescript": "2.2.1",
         "gulp": "^3.9.1",
-        "@types/core-js": "0.9.35",
         "@types/node": "7.0.5"
     }
 }
