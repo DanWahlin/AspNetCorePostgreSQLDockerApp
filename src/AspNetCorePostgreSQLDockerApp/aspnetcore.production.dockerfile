@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:latest
+FROM microsoft/dotnet:1.1.1-sdk
 
 MAINTAINER Dan Wahlin, Shayne Boyer
 
@@ -14,15 +14,7 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
 
 RUN ["npm", "install"]
 
-RUN ["dotnet", "restore"]
-
-RUN ["dotnet", "build"]
-
-# RUN ["dotnet", "ef", "database", "update"]
-
-EXPOSE 5000/tcp
-
-ENTRYPOINT ["dotnet", "run"]
+CMD ["/bin/bash", "-c", "dotnet restore && dotnet run"]
 
 
 

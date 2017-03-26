@@ -1,28 +1,13 @@
-FROM microsoft/dotnet:1.1.0-sdk-projectjson
+FROM microsoft/dotnet:1.1.1-sdk
 
 MAINTAINER Dan Wahlin, Shayne Boyer
 
 ENV DOTNET_USE_POLLING_FILE_WATCHER=1
 ENV ASPNETCORE_URLS=http://*:5000
 
-COPY ./project.json /var/www/aspnetcoreapp/project.json
-COPY ./package.json /var/www/aspnetcoreapp/package.json
-
 WORKDIR /var/www/aspnetcoreapp
 
-RUN dotnet restore
-
-RUN dotnet build
-
-EXPOSE 5000/tcp
-
-ENTRYPOINT ["dotnet", "watch", "run"]
-
-#ENTRYPOINT ["dotnet", "run"]
-
-
-
-
+CMD ["/bin/bash", "-c", "dotnet restore && dotnet watch run"]
 
 
 

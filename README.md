@@ -24,8 +24,3 @@ The app uses Entity Framework to create a simple database that stores Docker com
 4. Run `docker-compose up`
 
 1. Navigate to http://localhost:5000 (http://192.168.99.100:5000 if using Docker Toolbox) in your browser to view the site.
-
-
-
-
-
