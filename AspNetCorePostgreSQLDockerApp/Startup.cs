@@ -8,26 +8,19 @@ using Microsoft.Extensions.Logging;
 using AspNetCorePostgreSQLDockerApp.Repository;
 using System.IO;
 using Microsoft.Extensions.FileProviders;
-using Swashbuckle.Swagger.Model;
-using Microsoft.Extensions.PlatformAbstractions;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace AspNetCorePostgreSQLDockerApp
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            // Set up configuration sources.
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-
-            builder.AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; set; }
+        public IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -51,75 +44,47 @@ namespace AspNetCorePostgreSQLDockerApp
             services.AddTransient<DockerCommandsDbSeeder>();
             services.AddTransient<CustomersDbSeeder>();
 
-            //Nice article by Shayne Boyer here on Swagger:
-            //https://docs.asp.net/en/latest/tutorials/web-api-help-pages-using-swagger.html
-            services.AddSwaggerGen();
-            services.ConfigureSwaggerGen(options =>
+            services.AddSwaggerGen(options =>
             {
-                options.SingleApiVersion(new Info
+                options.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
-                    Title = "ASP.NET Core Customers API",
-                    Description = "ASP.NET Core Customers Web API documentation",
+                    Title = "Application API",
+                    Description = "Application Documentation",
                     TermsOfService = "None",
-                    Contact = new Contact { Name = "Dan Wahlin", Url = "http://twitter.com/danwahlin"},
+                    Contact = new Contact { Name = "Author", Url = "" },
                     License = new License { Name = "MIT", Url = "https://en.wikipedia.org/wiki/MIT_License" }
                 });
 
-                //Enable following for XML comment support and add "xmlDoc": true to buildOptions in project.json
-
-                //Base app path 
-                //var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-
-                //Set the comments path for the swagger json and ui.
-                //options.IncludeXmlComments(basePath + "\\yourAPI.xml");
+                // Add XML comment document by uncommenting the following
+                // var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "MyApi.xml");
+                // options.IncludeXmlComments(filePath);
 
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,
                               DockerCommandsDbSeeder dockerCommandsDbSeeder, CustomersDbSeeder customersDbSeeder)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            //app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
- 
-            // Route all unknown requests to app root
-            // app.Use(async (context, next) =>
-            // {
-            //     await next();
-
-            //     // Handle Angular routes which won't work on the server-side
-            //     if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
-            //     {
-            //         context.Request.Path = "/index.html";  
-            //         await next();
-            //     }
-            // });
-
-            // Serve wwwroot as root
-            app.UseFileServer();
-
             // Serve /node_modules as a separate root (for packages that use other npm modules client side)
-            app.UseFileServer(new FileServerOptions()
-            {
-                // Set root of file server
-                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules")),
-                RequestPath = "/node_modules", 
-                EnableDirectoryBrowsing = false
-            });
+            // app.UseFileServer(new FileServerOptions()
+            // {
+            //     // Set root of file server
+            //     FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules")),
+            //     RequestPath = "/node_modules", 
+            //     EnableDirectoryBrowsing = false
+            // });
 
             app.UseStaticFiles();
 
@@ -127,7 +92,11 @@ namespace AspNetCorePostgreSQLDockerApp
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
-            app.UseSwaggerUi();
+            // Visit http://localhost:5000/swagger
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseMvc(routes =>
             {
