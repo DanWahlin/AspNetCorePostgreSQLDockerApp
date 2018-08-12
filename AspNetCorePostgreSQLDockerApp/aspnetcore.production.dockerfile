@@ -1,22 +1,20 @@
-FROM microsoft/dotnet:1.1.1-sdk
+FROM microsoft/dotnet:sdk
 
-MAINTAINER Dan Wahlin, Shayne Boyer
+LABEL author="Dan Wahlin"
 
 ENV ASPNETCORE_URLS=http://*:5000
 
-COPY . /var/www/aspnetcoreapp
-
 WORKDIR /var/www/aspnetcoreapp
 
-#Install Node
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
-   	&& apt-get install -qqy nodejs
+COPY . .
 
-RUN ["npm", "install"]
+EXPOSE 5000
 
 CMD ["/bin/bash", "-c", "dotnet restore && dotnet run"]
 
-
+# Note that this is only for demo and is intended to keep things simple. 
+# A multi-stage dockerfile would normally be used here to build the .dll and use
+# the microsoft/dotnet:aspnetcore-runtime image for the final image
 
 
 
