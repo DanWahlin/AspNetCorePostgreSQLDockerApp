@@ -20,7 +20,7 @@ CMD ["/bin/bash", "-c", "dotnet restore && dotnet watch run"]
 
 
 # Build the image:
-# docker build -f aspnetcore.development.dockerfile -t [yourDockerHubID]/dotnet:1.0.0 
+# docker build -f aspnetcore.development.dockerfile -t [yourDockerHubID]/dotnet:1.0.0 .
 
 # Option 1
 # Start PostgreSQL and ASP.NET Core (link ASP.NET core to ProgreSQL container with legacy linking)
