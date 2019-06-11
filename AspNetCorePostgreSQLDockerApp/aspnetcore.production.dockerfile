@@ -2,7 +2,7 @@
 # can be used for ASP.NET Core 2+
 # FROM mcr.microsoft.com/dotnet/core/sdk:2.2
 
-FROM microsoft/dotnet:sdk
+FROM microsoft/dotnet:2.2-sdk
 
 LABEL author="Dan Wahlin"
 
