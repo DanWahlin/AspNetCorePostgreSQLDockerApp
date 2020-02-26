@@ -7,9 +7,7 @@ services:
     image: 'aspnetcoreapp'
     build:
       context: .
-      dockerfile: aspnetcore.development.dockerfile
-    volumes:
-      - .:/var/www/aspnetcoreapp
+      dockerfile: aspnetcore.dockerfile
     ports:
      - "5000:5000"
     depends_on:
@@ -21,6 +19,7 @@ services:
     container_name: 'postgres'
     image: postgres
     environment:
+      # change this for a "real" app!
       POSTGRES_PASSWORD: password
     networks:
       - aspnetcoreapp-network
@@ -28,5 +27,3 @@ services:
 networks:
   aspnetcoreapp-network:
     driver: bridge
-
-
