@@ -72,7 +72,7 @@ namespace AspNetCorePostgreSQLDockerApp
 
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "Client/dist";
+                configuration.RootPath = "dist";
             });
 
             // services.AddRouting(options => options.LowercaseUrls = true);
@@ -95,11 +95,7 @@ namespace AspNetCorePostgreSQLDockerApp
             app.UseCors("AllowAllPolicy");
 
             app.UseStaticFiles();
-
-            if (!env.IsDevelopment())
-            {
-                app.UseSpaStaticFiles();
-            }
+            app.UseSpaStaticFiles();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint
             app.UseSwagger();

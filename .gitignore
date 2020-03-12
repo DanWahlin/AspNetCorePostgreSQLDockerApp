@@ -1,6 +1,7 @@
 #project.json files
 project.json.old
 
+dist
 .vs
 
 #remove generated files
