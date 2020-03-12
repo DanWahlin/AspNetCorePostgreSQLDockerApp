@@ -12,6 +12,7 @@ export class CustomersComponent implements OnInit {
     customers: ICustomer[] = [];
     editId: number = 0;
     errorMessage: string;
+    editViewEnabled = false;
 
     constructor(private dataService: DataService) {  }
 
