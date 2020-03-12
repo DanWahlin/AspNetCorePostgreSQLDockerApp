@@ -5,11 +5,6 @@ VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspNetCorePostgreSQLDockerApp", "AspNetCorePostgreSQLDockerApp/AspNetCorePostgreSQLDockerApp.csproj", "{94FF9455-201B-452A-8262-AFB25D1CF615}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5A615B01-A8BB-4348-9447-07A43A9CD2C0}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCorePostgreSQLDockerApp", "AspNetCorePostgreSQLDockerApp\AspNetCorePostgreSQLDockerApp.csproj", "{E32E1866-48E9-47FA-9DEF-3F91BC29C5C8}"
 EndProject
 Global
