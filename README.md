@@ -9,7 +9,13 @@ The app uses Entity Framework to create a simple database that stores Docker com
 
 1. Install `Docker for Mac` or `Docker for Windows` (or Docker Toolbox: http://docker.com/toolbox if you have to)
 
-1. Navigate to the `AspNetCorePostgreSQLDockerApp` subfolder in a console window
+1. Navigate to the `AspNetCorePostgreSQLDockerApp` subfolder in a console window.
+
+1. Open the `Client` folder and run the following commands at the root of the folder (requires Node.js):
+
+    - `npm install`
+    - `npm install -g @angular/cli`
+    - `ng build`
 
 1. Open a separate command prompt window.
 
