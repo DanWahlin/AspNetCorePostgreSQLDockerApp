@@ -70,6 +70,11 @@ namespace AspNetCorePostgreSQLDockerApp
                        .AllowAnyHeader();
             }));
 
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "Client/dist";
+            });
+
             // services.AddRouting(options => options.LowercaseUrls = true);
 
         }
