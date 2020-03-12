@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+
+  web:
+    container_name: 'aspnetcoreapp'
+    # would need to tag aspnetcoreapp image as shown below to run
+    # used to setup a Web App for Containers example
+    # https://docs.microsoft.com/en-us/azure/app-service/containers/quickstart-multi-container
+    image: 'danwahlin/aspnetcoreapp'
+    ports:
+     - "80:5000"
+    depends_on:
+     - "postgres"
+    networks:
+      - aspnetcoreapp-network
+
+  postgres:
+    container_name: 'postgres'
+    image: postgres
+    environment:
+      # change this for a "real" app!
+      POSTGRES_PASSWORD: password
+    networks:
+      - aspnetcoreapp-network
+
+networks:
+  aspnetcoreapp-network:
+    driver: bridge
